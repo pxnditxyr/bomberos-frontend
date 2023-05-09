@@ -29,15 +29,18 @@ export const SignUp = () => {
 
   const onSubmit = ( event : ChangeEvent<HTMLFormElement> ) => {
     event.preventDefault()
-    onResetForm()
+    // onResetForm()
     console.log( form )
   }
 
   return (
     <AuthLayout title="Registrarse">
-      <div>
+      <div
+        className="w-1/4 h-full flex flex-col justify-center items-center gap-4 px-4 py-8"
+      >
         <form
           onSubmit={ onSubmit }
+          className="w-full flex flex-col justify-center items-center gap-8 px-4 py-8"
         >
           <input
             name="email"
@@ -45,6 +48,7 @@ export const SignUp = () => {
             placeholder="Correo"
             value={ email }
             onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
             name="surname"
@@ -52,6 +56,7 @@ export const SignUp = () => {
             placeholder="Apellidos"
             value={ surname }
             onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
             name="name"
@@ -59,6 +64,7 @@ export const SignUp = () => {
             placeholder="Nombres"
             value={ name }
             onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
             name="password"
@@ -66,6 +72,7 @@ export const SignUp = () => {
             placeholder="Contraseña"
             value={ password }
             onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
             name="password2"
@@ -73,10 +80,16 @@ export const SignUp = () => {
             placeholder="Repetir Contraseña"
             value={ password2 }
             onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
-          <button> Registrarse </button>
+          <button
+            className="w-full bg-red-500 text-white font-bold py-2 rounded-3xl hover:bg-black focus:outline-none"
+          > Registrarse </button>
         </form>
-        <Link to="../signin"> Ya tienes cuenta? Inicia Sesión </Link>
+        <Link
+          to="../signin"
+          className="text-red-500 font-bold"
+        > Ya tienes cuenta? Inicia Sesión </Link>
       </div>
     </AuthLayout>
   )

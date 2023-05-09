@@ -5,16 +5,23 @@ interface IProps {
   children: JSX.Element | JSX.Element[];
   title: string;
   navbarLinks: INavbarLinks[];
+  className?: string;
 }
 
-export const PublicLayout = ( { children, title, navbarLinks } : IProps ) => {
+export const PublicLayout = ( { children, title, navbarLinks, className } : IProps ) => {
   return (
-    <div>
+    <div className={ `w-full h-screen flex flex-col bg-blue-600 ${ className }` }>
       <Navbar navbarLinks={ navbarLinks } />
-      <h1> { title } </h1>
-      <main>
-        { children }
-      </main>
+      <div
+        className="w-full h-full flex flex-col items-center gap-4 px-4 py-12"
+      >
+        <h1
+          className="text-5xl font-bold font-serif text-center text-white"
+        > { title } </h1>
+        <main className="w-full flex flex-col justify-center items-center gap-4 px-4 py-8">
+          { children }
+        </main>
+      </div>
     </div>
   )
 }

@@ -16,11 +16,17 @@ const navbarLinks : INavbarLinks[] = [
 
 export const AuthLayout = ( { children, title } : IProps ) => {
   return (
-    <div>
+    <div className="w-full h-screen flex flex-col">
       <Navbar navbarLinks={ navbarLinks } />
-      <h1>{ title }</h1>
-      <div>
-        { children }
+      <div
+        className="w-full h-full flex flex-col justify-center items-center gap-4 px-4 py-8"
+      >
+        <h1
+          className="text-3xl font-bold font-serif text-center"
+        >{ title }</h1>
+        <div className="w-full flex flex-col justify-center items-center gap-4 px-4 py-8">
+          { children }
+        </div>
       </div>
     </div>
   )
