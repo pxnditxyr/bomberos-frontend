@@ -34,7 +34,7 @@ const carouselItems = [
 export const ProfesionalesDeLaEmergencia = () => {
 
   return (
-    <PublicLayout title="Profesionales de la Emergencia" navbarLinks={ navbarLinksBomberos } className="h-auto">
+    <PublicLayout title="Profesionales de la Emergencia" navbarLinks={ navbarLinksBomberos } height>
       <div
         className="w-full h-full flex flex-col justify-center items-center gap-4 px-4 py-8 bg-white flex justify-center items-center gap-12 p-8 w-3/4 bg-white rounded-md"
       >

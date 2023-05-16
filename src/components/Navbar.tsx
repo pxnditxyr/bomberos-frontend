@@ -3,13 +3,17 @@ import { INavbarLinks } from '../interfaces'
 
 interface IProps {
   navbarLinks: INavbarLinks[],
-  bgImage?: string
+  bgImage?: boolean,
+  style?: React.CSSProperties
 }
 
-export const Navbar = ( { navbarLinks, bgImage } : IProps ) => {
+export const Navbar = ( { navbarLinks, bgImage, style } : IProps ) => {
   return (
     
-    <nav className={ `w-full flex flex-row py-5 border-b-4 bg-red-500 ${ bgImage ? `bg-[url('${ bgImage }')] bg-no-repeat py-20 bg-[length:100%_350px] bg-top bg-black` : "" }` }>
+    <nav
+      className={ `w-full flex flex-row border-b-4 ${ bgImage ? `py-20` : 'py-5 bg-red-500' }` }
+      style={ style }
+    >
       <ul className="w-full flex flex-row justify-center text-white px-5 gap-4">
         {
           navbarLinks.map( ( { to, name, exact } ) => (

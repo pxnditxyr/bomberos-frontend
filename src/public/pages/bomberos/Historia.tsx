@@ -3,7 +3,7 @@ import { navbarLinksBomberos } from './navbarLinksBomberos'
 
 export const Historia = () => {
   return (
-    <PublicLayout title="Historia" navbarLinks={ navbarLinksBomberos } className="h-auto">
+    <PublicLayout title="Historia" navbarLinks={ navbarLinksBomberos } height>
       <article className="flex justify-center items-center gap-12 p-8 w-3/4 bg-white rounded-md">
         <img
           className="w-1/2 rounded-md"
@@ -19,7 +19,7 @@ A raíz de aquel incendio, fue el Doctor Sennen Ondarza, Diputado por Cobija y T
 De las primeras deliberaciones resulto la formación de un cuerpo de Bomberos bautizado  con  el  nombre  de  Bomba  Antofagasta,  conformado  por  dos  secciones denominadas,  la  Primera  hachas,  ganchos  y  escaleras y  la  Segunda  guardia  de protección.
 Para recaudar los fondos necesarios para la adquisición de equipos y materiales contra incendios, se hizo una colecta publica cuya recaudación arrojo la suma de 1495 Bs.
 El señor Eduardo Orchard, dueño de la única maestranza, se encargó de la fabricación de un carro porta escaleras, hachas bicheros y otros implementos.
-	 
+
 El acta de fundación data del 04 de abril pero su organización definitiva es de fecha 05 de abril de 1875, habiendo sido inaugurado el cuerpo de Bomberos de Antofagasta el 10 de junio de aquel año. El reglamento orgánico fue aprobado por el gobierno de Bolivia el 20 de enero de 1879.
 
 

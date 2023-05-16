@@ -3,7 +3,7 @@ import { navbarLinksQuienesSomos } from './navbarLinksQuienesSomos'
 
 export const Historia = () => {
   return (
-    <PublicLayout title="Historia" navbarLinks={ navbarLinksQuienesSomos } className="h-auto">
+    <PublicLayout title="Historia" navbarLinks={ navbarLinksQuienesSomos } height>
       <article className="flex justify-center items-center gap-4 p-8 w-3/4 bg-white rounded-md">
         <img
           className="w-1/2 rounded-md"

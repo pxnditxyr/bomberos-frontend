@@ -3,7 +3,7 @@ import { navbarLinksDocumentos } from './navbarLinksDocumentos'
 
 export const Estatutos = () => {
   return (
-    <PublicLayout title="Estatutos" navbarLinks={ navbarLinksDocumentos } className="h-auto">
+    <PublicLayout title="Estatutos" navbarLinks={ navbarLinksDocumentos } height>
       <div
         className="w-1/2 bg-white rounded-lg shadow-lg py-8 px-12"
       >
