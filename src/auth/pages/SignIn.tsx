@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { AuthLayout } from '../layout'
-import { useForm } from '../../hooks'
-import { ChangeEvent } from 'react'
+import { useAuthStore, useForm } from '../../hooks'
+import { ChangeEvent, useEffect } from 'react'
+
+import Swal from 'sweetalert2';
 
 const formularioVacio = {
   email: '',
@@ -10,16 +12,28 @@ const formularioVacio = {
 
 export const SignIn = () => {
 
+  const { startSignInOff, errorMessage } = useAuthStore();
+
   const {
     email, password,
-    onInputChange, onResetForm, form
+    onInputChange, form
   } = useForm( formularioVacio )
 
   const onSubmit = ( event : ChangeEvent<HTMLFormElement> ) => {
     event.preventDefault()
+    startSignInOff({ email, password });
     console.log( form )
-    // onResetForm()
   }
+
+  useEffect( () => {
+    if ( errorMessage !== undefined ) {
+      if ( typeof errorMessage === 'string' ) {
+        Swal.fire( 'Error al Iniciar Sesión', errorMessage, 'error' );
+      } else {
+        Swal.fire( 'Error al Iniciar Sesión', errorMessage.join( ',\n' ), 'error' );
+      }
+    }
+  }, [ errorMessage ] );
 
   return (
     <AuthLayout title="Iniciar Sesión">

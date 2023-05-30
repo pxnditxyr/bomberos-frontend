@@ -6,10 +6,21 @@ import {
 } from 'react-router-dom'
 import { PublicRoutes } from '../public/routes/PublicRoutes'
 import { AuthRoutes } from '../auth/routes/AuthRoutes'
+import { useAuthStore } from '../hooks';
+import { useEffect } from 'react';
+import { YoBombero } from '../yo-bombero/pages';
 
 export const AppRouter = () => {
+  
+  const { status, checkAuthTokenOff } = useAuthStore();
 
-  const status = 'not-authenticated'
+  useEffect( () => {
+    checkAuthTokenOff();
+  }, [] )
+
+  if ( status === 'checking' ) {
+    return <div> Loading... </div>;
+  }
 
   return (
     <BrowserRouter>
@@ -26,7 +37,7 @@ export const AppRouter = () => {
             )
             : (
               <>
-                <Route path="yo-bombero" element={ <h1>Yo soy bombero</h1> } />
+                <Route path="yo-bombero" element={ <YoBombero /> } />
                 <Route path="*" element={ <Navigate to="/yo-bombero" /> } />
               </>
             )

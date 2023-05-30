@@ -1,8 +1,9 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 
 import { Link } from 'react-router-dom'
 import { AuthLayout } from '../layout'
-import { useForm } from '../../hooks'
+import { useAuthStore, useForm } from '../../hooks'
+import Swal from 'sweetalert2'
 
 /*const formularioVacio = {
   email: 'example@example.com',
@@ -12,26 +13,48 @@ import { useForm } from '../../hooks'
   password2: '1234',
 }*/
 
+
 const formularioVacio = {
   email: '',
-  surname: '',
-  name: '',
   password: '',
   password2: '',
+  fechaNacimiento: '',
+  nombre: '',
+  apellido: '',
+  ci: 12345678,
+  telefono: 77202020,
+  estadoCivil: 'soltero',
+  genero: 'masculino'
 }
 
 export const SignUp = () => {
-  
+
+  const { startSignUp, errorMessage } = useAuthStore();
+
   const {
-    email, surname, name, password, password2,
-    onInputChange, onResetForm, form
+    email, password, password2, fechaNacimiento, nombre, apellido, ci, telefono, estadoCivil, genero,
+    onInputChange, form, onSelectChange
   } = useForm( formularioVacio )
 
   const onSubmit = ( event : ChangeEvent<HTMLFormElement> ) => {
     event.preventDefault()
-    // onResetForm()
     console.log( form )
+    if ( password !== password2 ) {
+      Swal.fire( 'Error al registrarse', 'Las contraseñas no coinciden', 'error' );
+      return;
+    }
+    startSignUp({ email, password, fechaNacimiento, nombre, apellido, ci, telefono, estadoCivil, genero })
   }
+
+  useEffect( () => {
+    if ( errorMessage !== undefined ) {
+      if ( typeof errorMessage === 'string' ) {
+        Swal.fire( 'Error al registrarse', errorMessage, 'error' );
+      } else {
+        Swal.fire( 'Error al registrarse', errorMessage.join( ',\n' ), 'error' );
+      }
+    }
+  }, [ errorMessage ] );
 
   return (
     <AuthLayout title="Registrarse">
@@ -51,21 +74,68 @@ export const SignUp = () => {
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
-            name="surname"
-            type="text"
-            placeholder="Apellidos"
-            value={ surname }
-            onChange={ onInputChange }
-            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
-          <input
-            name="name"
+            name="nombre"
             type="text"
             placeholder="Nombres"
-            value={ name }
+            value={ nombre }
             onChange={ onInputChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
+
+          <input
+            name="apellido"
+            type="text"
+            placeholder="Apellidos"
+            value={ apellido }
+            onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+
+          <input
+            name="ci"
+            type="number"
+            placeholder="Carnet de Identidad"
+            value={ ci }
+            onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+
+          <input
+            name="telefono"
+            type="number"
+            placeholder="Telefono"
+            value={ telefono }
+            onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+
+          <input
+            name="fechaNacimiento"
+            type="date"
+            placeholder="Fecha de Nacimiento"
+            value={ fechaNacimiento }
+            onChange={ onInputChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+          <select
+            name="estadoCivil"
+            value={ estadoCivil }
+            onChange={ onSelectChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500">
+            <option value="soltero" defaultChecked>Soltero</option>
+            <option value="casado">Casado</option>
+            <option value="divorciado">Divorciado</option>
+            <option value="viudo">Viudo</option>
+          </select>
+          <select
+            name="genero"
+            value={ genero }
+            onChange={ onSelectChange }
+            className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500">
+            <option value="masculino" defaultChecked>Masculino</option> 
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
           <input
             name="password"
             type="password"
