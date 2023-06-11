@@ -9,17 +9,19 @@ import { AuthRoutes } from '../auth/routes/AuthRoutes'
 import { useAuthStore } from '../hooks';
 import { useEffect } from 'react';
 import { YoBombero } from '../yo-bombero/pages';
+import { Loading } from '../pages';
 
 export const AppRouter = () => {
   
-  const { status, checkAuthTokenOff } = useAuthStore();
+  const { status, checkAuthToken } = useAuthStore();
+  // const status = 'checking'
 
   useEffect( () => {
-    checkAuthTokenOff();
+    checkAuthToken();
   }, [] )
 
   if ( status === 'checking' ) {
-    return <div> Loading... </div>;
+    return <Loading />
   }
 
   return (

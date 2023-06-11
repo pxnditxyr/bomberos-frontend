@@ -5,26 +5,17 @@ import { AuthLayout } from '../layout'
 import { useAuthStore, useForm } from '../../hooks'
 import Swal from 'sweetalert2'
 
-/*const formularioVacio = {
-  email: 'example@example.com',
-  surname: 'example1',
-  name: 'example',
-  password: '1234',
-  password2: '1234',
-}*/
-
-
 const formularioVacio = {
-  email: '',
-  password: '',
-  password2: '',
-  fechaNacimiento: '',
-  nombre: '',
-  apellido: '',
-  ci: 12345678,
-  telefono: 77202020,
-  estadoCivil: 'soltero',
-  genero: 'masculino'
+  name: 'nico',
+  lastName: 'moya',
+  phone: '7458989',
+  dni: '1234567',
+  civilStatus: 'divorciado',
+  gender: 'femenino',
+  birthDate: '1999-12-12',
+  email: 'moyaputo@gmail.com',
+  password: '1234567',
+  password2: '1234567',
 }
 
 export const SignUp = () => {
@@ -32,7 +23,9 @@ export const SignUp = () => {
   const { startSignUp, errorMessage } = useAuthStore();
 
   const {
-    email, password, password2, fechaNacimiento, nombre, apellido, ci, telefono, estadoCivil, genero,
+    name, lastName, phone, dni,
+    civilStatus, gender, birthDate,
+    email, password, password2,
     onInputChange, form, onSelectChange
   } = useForm( formularioVacio )
 
@@ -43,7 +36,17 @@ export const SignUp = () => {
       Swal.fire( 'Error al registrarse', 'Las contraseñas no coinciden', 'error' );
       return;
     }
-    startSignUp({ email, password, fechaNacimiento, nombre, apellido, ci, telefono, estadoCivil, genero })
+    startSignUp({
+      name,
+      lastName,
+      email,
+      password,
+      phone: Number( phone ),
+      dni: Number( dni ),
+      civilStatus,
+      gender,
+      birthDate
+    })
   }
 
   useEffect( () => {
@@ -57,7 +60,7 @@ export const SignUp = () => {
   }, [ errorMessage ] );
 
   return (
-    <AuthLayout title="Registrarse">
+    <AuthLayout title="Registrarse" hegiht>
       <div
         className="w-1/4 h-full flex flex-col justify-center items-center gap-4 px-4 py-8"
       >
@@ -74,52 +77,53 @@ export const SignUp = () => {
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <input
-            name="nombre"
+            name="name"
             type="text"
             placeholder="Nombres"
-            value={ nombre }
+            value={ name }
             onChange={ onInputChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <input
-            name="apellido"
+            name="lastName"
             type="text"
             placeholder="Apellidos"
-            value={ apellido }
+            value={ lastName }
             onChange={ onInputChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <input
-            name="ci"
+            name="dni"
             type="number"
             placeholder="Carnet de Identidad"
-            value={ ci }
+            value={ dni }
             onChange={ onInputChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <input
-            name="telefono"
+            name="phone"
             type="number"
             placeholder="Telefono"
-            value={ telefono }
+            value={ phone }
             onChange={ onInputChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <input
-            name="fechaNacimiento"
+            name="birthDate"
             type="date"
             placeholder="Fecha de Nacimiento"
-            value={ fechaNacimiento }
+            value={ birthDate }
             onChange={ onInputChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500"
           />
+
           <select
-            name="estadoCivil"
-            value={ estadoCivil }
+            name="civilStatus"
+            value={ civilStatus }
             onChange={ onSelectChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500">
             <option value="soltero" defaultChecked>Soltero</option>
@@ -128,8 +132,8 @@ export const SignUp = () => {
             <option value="viudo">Viudo</option>
           </select>
           <select
-            name="genero"
-            value={ genero }
+            name="gender"
+            value={ gender }
             onChange={ onSelectChange }
             className="w-full px-4 py-2 rounded-3xl focus:outline-none focus:ring-2 focus:ring-red-500">
             <option value="masculino" defaultChecked>Masculino</option> 

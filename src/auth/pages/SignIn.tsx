@@ -6,13 +6,13 @@ import { ChangeEvent, useEffect } from 'react'
 import Swal from 'sweetalert2';
 
 const formularioVacio = {
-  email: '',
-  password: '',
+  email: 'moyaputo@gmail.com',
+  password: '1234567'
 }
 
 export const SignIn = () => {
 
-  const { startSignInOff, errorMessage } = useAuthStore();
+  const { startSignIn, errorMessage } = useAuthStore();
 
   const {
     email, password,
@@ -21,7 +21,7 @@ export const SignIn = () => {
 
   const onSubmit = ( event : ChangeEvent<HTMLFormElement> ) => {
     event.preventDefault()
-    startSignInOff({ email, password });
+    startSignIn({ email, password });
     console.log( form )
   }
 
