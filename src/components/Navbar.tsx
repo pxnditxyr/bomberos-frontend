@@ -5,13 +5,14 @@ interface IProps {
   navbarLinks: INavbarLinks[],
   bgImage?: boolean,
   style?: React.CSSProperties
+  border?: boolean
 }
 
-export const Navbar = ( { navbarLinks, bgImage, style } : IProps ) => {
+export const Navbar = ( { navbarLinks, bgImage, style, border } : IProps ) => {
   return (
     
     <nav
-      className={ `w-full flex flex-row border-b-4 ${ bgImage ? `py-20` : 'py-5 bg-red-500' }` }
+      className={ `w-full flex flex-row ${ !border ? 'border-b-4' : ''  } ${ bgImage ? `py-20` : 'py-5 bg-red-500' }` }
       style={ style }
     >
       <ul className="w-full flex flex-row justify-center text-white px-5 gap-4">

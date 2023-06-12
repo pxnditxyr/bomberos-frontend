@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2';
 import { bomberosApi } from '../api';
-import { formatErrors } from '../helpers';
 import { IUser } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../store';
 import { clearErrorMessage, onChecking, onSignIn, onSignOut } from '../store/auth';
@@ -51,17 +50,7 @@ export const useAuthStore = () => {
 
       localStorage.setItem( 'token', data.token );
       localStorage.setItem( 'token-init-date', new Date().getTime().toString() );
-      console.log({
-        idPrueba: data.id,
-        lastNamePrueba: data.lastName,
-        namePrueba: data.name,
-        phonePrueba: data.phone,
-        dniPrueba: data.dni,
-        civilStatusPrueba: data.civilStatus,
-        genderPrueba: data.gender,
-        birthDatePrueba: data.birthDate,
-        emailPrueba: data.email
-      })
+      
       dispatch( onSignIn({
         id: data.id,
         lastName: data.lastName,
@@ -74,7 +63,6 @@ export const useAuthStore = () => {
         email: data.email
       }) );
     } catch ( error : any ) {
-      console.log(error)
       dispatch( onSignOut( error.response.data.message ) );
       setTimeout( () => {
         dispatch( clearErrorMessage() );
@@ -85,7 +73,6 @@ export const useAuthStore = () => {
 
   const checkAuthToken = async () => {
     const token = localStorage.getItem( 'token' );
-    console.log({ token })
     if ( !token ) {
       dispatch( onSignOut( undefined ) );
       return;
@@ -119,40 +106,12 @@ export const useAuthStore = () => {
     dispatch( onSignOut( undefined ) );
   }
 
-  const startUpdatingProfile = async ( user : IUser ) => {
-    try {
-      await bomberosApi.put( '/profile/update', user );
-      dispatch( onSignIn({ ...user }) );
-      return true;
-    } catch ( error : any ) {
-      Swal.fire( 'Error', formatErrors( error.response.data ), 'error' );
-      setTimeout( () => {
-        dispatch( clearErrorMessage() );
-      }, 1 );
-      return false;
-    }
-  };
-
-  const startDeletingAccount = async () => {
-    try {
-      await bomberosApi.delete( '/profile/delete' );
-      startSignOut();
-    } catch ( error : any ) {
-      dispatch( onSignOut( formatErrors( error.response.data ) ) );
-      setTimeout( () => {
-        dispatch( clearErrorMessage() );
-      }, 1 );
-    }
-  };
-
   return {
     checkAuthToken,
     errorMessage,
     startSignIn,
     startSignOut,
     startSignUp,
-    startUpdatingProfile,
-    startDeletingAccount,
     status,
     user,
   }

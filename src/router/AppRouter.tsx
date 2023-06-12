@@ -8,8 +8,8 @@ import { PublicRoutes } from '../public/routes/PublicRoutes'
 import { AuthRoutes } from '../auth/routes/AuthRoutes'
 import { useAuthStore } from '../hooks';
 import { useEffect } from 'react';
-import { YoBombero } from '../yo-bombero/pages';
 import { Loading } from '../pages';
+import { PrivateRoutes } from '../private/routes';
 
 export const AppRouter = () => {
   
@@ -39,8 +39,7 @@ export const AppRouter = () => {
             )
             : (
               <>
-                <Route path="yo-bombero" element={ <YoBombero /> } />
-                <Route path="*" element={ <Navigate to="/yo-bombero" /> } />
+                <Route path="/*" element={ <PrivateRoutes /> } />
               </>
             )
         }
