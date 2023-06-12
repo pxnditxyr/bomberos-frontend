@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal } from '..';
 import { useForm, useUiStore } from '../../hooks';
+import { capitalizeString } from '../../helpers';
 
 interface IHeader {
   title: string;
@@ -18,7 +19,6 @@ interface IProps {
 }
 
 export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructure, activeItem, startSavingItem } : IProps ) => {
-
   const { openDateModal, closeDateModal } = useUiStore()
   const { form, onInputChange, setNewFormState } = useForm({ ...newInitialForm })
   const [ isDeleting, setIsDeleting ] = useState( false )
@@ -49,7 +49,6 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
 
   const onSubmit = ( event : React.FormEvent<HTMLFormElement> ) => {
     event.preventDefault()
-    console.log( 'onSubmit', form )
     startSavingItem( { ...activeItem, ...form } )
     closeDateModal()
   }
@@ -64,7 +63,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
     <div className="w-full h-full flex flex-col justify-center items-center gap-4 px-4 py-8" >
       <article className="relative overflow-x-auto shadow-md sm:rounded-lg" >
         <table className="w-full text-sm text-left text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-700 text-gray-400 p-12">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-700 text-gray-400 p-12 text-white">
             <tr>
               {
                 header.map( ( { title, key } ) => (
@@ -104,7 +103,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
           </tbody>
         </table>
       </article>
-      <div className="absolute bottom-0 right-0 p-4">
+      <div className="absolute bottom-8 right-12 p-4">
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold p-4 rounded-full"
           onClick={ onAddClick }
@@ -124,12 +123,12 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                 {
                   Object.keys( form ).map( ( key, index ) => (
                     <div key={ index }>
-                      <label htmlFor={ key } className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{ key }</label>
+                      <label htmlFor={ key } className="block mb-2 text-sm font-medium text-white">{ capitalizeString( key ) }</label>
                       <input
                         type="text"
                         name={ key }
                         id={ key }
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                         placeholder={ key }
                         value={ form[ key ] || '' }
                         onChange={ onInputChange }
@@ -138,7 +137,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                     </div>
                   ))
                 }
-                <button className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> Enviar </button>
+                <button className="w-full text-white focus:ring-4 focus:outline-none ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"> Enviar </button>
               </form>
         </Modal>
       }

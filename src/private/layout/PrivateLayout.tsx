@@ -32,7 +32,7 @@ const navbarLinks : INavbarLinks[] = [
 
 export const PrivateLayout = ( { children, title, hegiht } : IProps ) => {
   return (
-    <div className={ `w-full flex flex-col ${ hegiht ? 'h-full' : 'h-screen' } bg-gradient-to-r from-red-500 via-purple-500 to-pink-500` }>
+    <div className={ `w-full flex flex-col ${ hegiht ? 'h-full' : 'h-screen' } bg-gradient-to-r from-cyan-500 to-blue-500` }>
       <Navbar navbarLinks={ navbarLinks } border />
       <div
         className="w-full h-full flex flex-col justify-center items-center gap-4 px-4 py-8 overflow-y-auto"

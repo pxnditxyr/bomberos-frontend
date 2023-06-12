@@ -32,7 +32,7 @@ export const categorySlice = createSlice({
       state.categories = state.categories.filter( ( category ) => category.id !== payload.id );
       state.activeCategory = null;
     },
-    onLoadingCategorys: ( state, { payload } ) => {
+    onLoadingCategories: ( state, { payload } ) => {
       state.isLoadingCategories = false;
       payload.forEach( ( category : ICategory ) => {
         const exists = state.categories.some( ( dbCategory ) => dbCategory.id === category.id );
@@ -40,7 +40,7 @@ export const categorySlice = createSlice({
           state.categories.push( category );
       });
     },
-    onSignOutCategorys: ( state ) => {
+    onSignOutCategories: ( state ) => {
       state.activeCategory = null;
       state.categories = [];
       state.isLoadingCategories = true;
@@ -51,8 +51,8 @@ export const categorySlice = createSlice({
 export const {
   onAddNewCategory,
   onDeleteCategory,
-  onLoadingCategorys,
+  onLoadingCategories,
   onSetActiveCategory,
-  onSignOutCategorys,
+  onSignOutCategories,
   onUpdatedCategory,
 } = categorySlice.actions;

@@ -23,15 +23,6 @@ const header = [
     key: 'user',
   },
 ]
-// interface IFormStructure {
-//   type: string
-//   label: string
-//   name: string
-//   value: string
-//   placeholder: string
-//   required?: boolean
-//   isMulti?: boolean
-// }
 
 const formStructure = [
   {
@@ -57,10 +48,10 @@ const newInitialForm = {
 
 export const Categories = () => {
 
-  const { categories, startLoadingCategorys, isLoadingCategories, startSavingCategory, startDeletingCategory, onActiveCategory, activeCategory } = useCategoryStore()
+  const { categories, startLoadingCategories, isLoadingCategories, startSavingCategory, startDeletingCategory, onActiveCategory, activeCategory } = useCategoryStore()
 
   useEffect( () => {
-    startLoadingCategorys()
+    startLoadingCategories()
   }, [] )
 
   const onSelect = ( category : IDataTable, action : string ) => {
@@ -72,7 +63,7 @@ export const Categories = () => {
 
   return (
     <div className="w-full h-screen flex flex-col items-center gap-4 px-4 py-8" >
-      <h1 className="text-5xl font-bold mt-8 text-teal-300" >Categorías</h1>
+      <h1 className="text-5xl font-bold mt-8 text-white" > Categorías </h1>
       {
         ( isLoadingCategories )
           ? <Loading />

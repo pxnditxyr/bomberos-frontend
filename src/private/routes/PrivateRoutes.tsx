@@ -4,6 +4,7 @@ import { IRoute } from '../../interfaces'
 import { YoBombero } from '../../yo-bombero/pages'
 import { PrivateLayout } from '../layout'
 import { Categories } from '../../categories/pages/Categories'
+import { Articles } from '../../articles'
 
 
 export const PrivateRoutes = () => {
@@ -15,7 +16,7 @@ export const PrivateRoutes = () => {
     },
     {
       path: 'articles',
-      Component: YoBombero,
+      Component: Articles
     },
     {
       path: 'stations',

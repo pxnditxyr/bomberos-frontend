@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import { bomberosApi } from '../api';
 import { ICategory } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../store';
-import { onAddNewCategory, onDeleteCategory, onSetActiveCategory, onUpdatedCategory, onLoadingCategorys } from '../store/categories';
+import { onAddNewCategory, onDeleteCategory, onSetActiveCategory, onUpdatedCategory, onLoadingCategories } from '../store/categories';
 
 export const useCategoryStore = () => {
 
@@ -41,11 +41,11 @@ export const useCategoryStore = () => {
     }
   };
 
-  const startLoadingCategorys = async () => {
+  const startLoadingCategories = async () => {
     try {
       const { data } = await bomberosApi.get( '/categories' );
       const categories = data
-      dispatch( onLoadingCategorys( categories ) );
+      dispatch( onLoadingCategories( categories ) );
     } catch ( error : any ) {
       Swal.fire( 'Error', error.response.data.message, 'error' );
     }
@@ -57,7 +57,7 @@ export const useCategoryStore = () => {
     onActiveCategory,
     startSavingCategory,
     startDeletingCategory,
-    startLoadingCategorys,
+    startLoadingCategories,
     hasCategorySelected: !!activeCategory,
     isLoadingCategories
   }
