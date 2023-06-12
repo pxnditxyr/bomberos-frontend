@@ -18,14 +18,16 @@ export const useCategoryStore = () => {
 
     try {
       if ( category.id ) {
-        await bomberosApi.patch( `/categories/${ category.id }`, category );
-        dispatch( onUpdatedCategory({ ...category }) );
+        const { id, ...updateCategory } = category;
+        const { data } = await bomberosApi.patch( `/categories/${ category.id }`, updateCategory );
+        dispatch( onUpdatedCategory({ ...category, user: data.user.email }) );
         return;
       }
       const { data } = await bomberosApi.post( '/categories', category )
-      dispatch( onAddNewCategory({ ...data.category, }) )
+      const { id, name, description, user } = data
+      dispatch( onAddNewCategory({ id, name, description, user: user.email }) )
     } catch ( error : any ) {
-      Swal.fire( 'Error', error.response.data.message, 'error' );
+      Swal.fire( 'Error', String( error.response.data.message ), 'error' );
     }
     
   };
@@ -41,7 +43,6 @@ export const useCategoryStore = () => {
 
   const startLoadingCategorys = async () => {
     try {
-
       const { data } = await bomberosApi.get( '/categories' );
       const categories = data
       dispatch( onLoadingCategorys( categories ) );

@@ -24,11 +24,16 @@ export const useForm = <T> ( initialValues : T ) => {
     setFormState( initialValues )
   }
 
+  const setNewFormState = ( newFormState : T ) => {
+    setFormState({ ...newFormState })
+  }
+
   return {
     form: formState,
     onInputChange,
     onResetForm,
     onSelectChange,
+    setNewFormState,
     ...formState
   }
 }

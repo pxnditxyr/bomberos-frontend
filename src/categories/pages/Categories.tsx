@@ -23,10 +23,41 @@ const header = [
     key: 'user',
   },
 ]
+// interface IFormStructure {
+//   type: string
+//   label: string
+//   name: string
+//   value: string
+//   placeholder: string
+//   required?: boolean
+//   isMulti?: boolean
+// }
+
+const formStructure = [
+  {
+    type: 'text',
+    name: 'name',
+    label: 'Nombre',
+    placeholder: 'Nombre de la categoría',
+    required: true,
+  },
+  {
+    type: 'text',
+    name: 'description',
+    label: 'Descripción',
+    placeholder: 'Descripción de la categoría',
+    required: true,
+  },
+]
+
+const newInitialForm = {
+  name: '',
+  description: '',
+}
 
 export const Categories = () => {
 
-  const { categories, startLoadingCategorys, isLoadingCategories, startSavingCategory, startDeletingCategory, onActiveCategory } = useCategoryStore()
+  const { categories, startLoadingCategorys, isLoadingCategories, startSavingCategory, startDeletingCategory, onActiveCategory, activeCategory } = useCategoryStore()
 
   useEffect( () => {
     startLoadingCategorys()
@@ -40,14 +71,19 @@ export const Categories = () => {
   }
 
   return (
-    <div
-      className="w-full h-full flex flex-col justify-center items-center gap-4 px-4 py-8"
-    >
-      <h1>Categories</h1>
+    <div className="w-full h-screen flex flex-col items-center gap-4 px-4 py-8" >
+      <h1 className="text-5xl font-bold mt-8 text-teal-300" >Categorías</h1>
       {
         ( isLoadingCategories )
           ? <Loading />
-          : <CrudTable title="Categorías" data={ categories as unknown as any } header={ header } onSelect={ onSelect } />
+          : <CrudTable
+              data={ categories as unknown as any }
+              header={ header } onSelect={ onSelect }
+              newInitialForm={ newInitialForm }
+              activeItem={ activeCategory as unknown as IDataTable }
+              formStructure={ formStructure }
+              startSavingItem={ startSavingCategory as unknown as ( item : IDataTable ) => void }
+            />
       }
     </div>
   )
