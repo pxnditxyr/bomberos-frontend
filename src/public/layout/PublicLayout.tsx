@@ -11,7 +11,7 @@ interface IProps {
 
 export const PublicLayout = ( { children, title, navbarLinks, className, height } : IProps ) => {
   return (
-    <div className={ `w-full flex flex-col bg-blue-600 ${ className } ${ height ? 'h-full' : 'h-screen' }` }>
+    <div className={ `w-full flex flex-col bg-slate-800 ${ className } ${ height ? 'h-full' : 'h-screen' }` }>
       <Navbar navbarLinks={ navbarLinks } />
       <div
         className="w-full h-full flex flex-col items-center gap-4 px-4 py-12"

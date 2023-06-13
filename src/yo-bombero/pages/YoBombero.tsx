@@ -32,14 +32,14 @@ export const YoBombero = () => {
             <h1 className="text-6xl font-bold"> Bienvenido <br/> <span className="text-red-500"> { user.name } { user.lastName } </span> </h1>
           </section>
           <section
-            className="w-full flex flex-col justify-center gap-4 px-4 py-8"
+            className="w-full flex flex-col justify-center gap-4 px-4 py-8 bg-red-500 rounded-3xl"
           >
-            <p className="text-xl font-bold"> <span className="font-bold text-red-500"> Email: </span> { user.email } </p>
-            <p className="text-xl font-bold"> <span className="font-bold text-red-500"> Fecha de nacimiento: </span> { user.birthDate }</p>
-            <p className="text-xl font-bold"> <span className="font-bold text-red-500"> Cedula de Identidad: </span> { user.dni } </p>
-            <p className="text-xl font-bold"> <span className="font-bold text-red-500"> Telefono: </span> { user.phone }</p>
-            <p className="text-xl font-bold"> <span className="font-bold text-red-500"> Estado civil: </span> { user.civilStatus }</p>
-            <p className="text-xl font-bold"> <span className="font-bold text-red-500"> Genero: </span> { user.gender } </p>
+            <p className="text-xl font-bold"> <span className="font-bold text-white"> Email: </span> { user.email } </p>
+            <p className="text-xl font-bold"> <span className="font-bold text-white"> Fecha de nacimiento: </span> { user.birthDate }</p>
+            <p className="text-xl font-bold"> <span className="font-bold text-white"> Cedula de Identidad: </span> { user.dni } </p>
+            <p className="text-xl font-bold"> <span className="font-bold text-white"> Telefono: </span> { user.phone }</p>
+            <p className="text-xl font-bold"> <span className="font-bold text-white"> Estado civil: </span> { user.civilStatus }</p>
+            <p className="text-xl font-bold"> <span className="font-bold text-white"> Genero: </span> { user.gender } </p>
           </section>
         </section>
       </article>

@@ -7,7 +7,7 @@ export const MisionVision = () => {
       <article className="flex justify-center items-center gap-4 p-8 w-3/4 bg-white rounded-md">
         <img
           className="w-1/2 rounded-md"
-          src="https://scontent.flpb3-2.fna.fbcdn.net/v/t39.30808-6/331745467_606715381298507_3300585523777897240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=8SzZGPB7J6wAX-m84en&_nc_ht=scontent.flpb3-2.fna&oh=00_AfAbtan_51MuUjwU3ECeu4exRr46fXtTDYScKLzziug7Wg&oe=645E7A24"
+          src="https://i.ibb.co/L0zz5Ct/IMAGEN-1.jpg"
           alt="Mision"
         />
         <div className="flex flex-col justify-center items-center gap-4 px-4 py-8 w-1/2">

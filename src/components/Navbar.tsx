@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { INavbarLinks } from '../interfaces'
+import { useAuthStore } from '../hooks'
 
 interface IProps {
   navbarLinks: INavbarLinks[],
@@ -9,6 +10,9 @@ interface IProps {
 }
 
 export const Navbar = ( { navbarLinks, bgImage, style, border } : IProps ) => {
+
+  const { status, startSignOut } = useAuthStore()
+
   return (
     
     <nav
@@ -25,6 +29,20 @@ export const Navbar = ( { navbarLinks, bgImage, style, border } : IProps ) => {
               > { name } </Link>
             </li>
           ) )
+        }
+        {
+          status === 'authenticated' && (
+            <>
+              <div className="flex-grow"></div>
+              <li
+                className="px-6 py-2 font-bold text-lg flex items-center bg-red-500 text-center rounded-3xl hover:underline hover:bg-blue-700"
+                onClick={ () => startSignOut() }
+              >
+                <button
+                > Sign Out </button>
+              </li>
+            </>
+          )
         }
       </ul>
     </nav>

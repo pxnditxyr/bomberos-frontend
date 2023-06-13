@@ -7,7 +7,7 @@ export const Aniversarios = () => {
       <article className="flex justify-center items-center gap-12 p-8 w-3/4 bg-white rounded-md">
         <img
           className="w-1/2 rounded-md"
-          src="https://scontent.flpb3-2.fna.fbcdn.net/v/t39.30808-6/331706375_1285556822395163_4678315496424572392_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=azrSih5peMwAX_31y6F&_nc_ht=scontent.flpb3-2.fna&oh=00_AfCFD_bMg7g9LBKnv5H0aHmMGDk-lmr8YPNwm7yJTZpJ9Q&oe=645EB53B"
+          src="https://i.ibb.co/C8wVKRz/ANIVERSARIO.jpg"
           alt="Mision"
         />
         <div className="flex flex-col justify-center items-center gap-4 px-4 py-8 w-1/2">
