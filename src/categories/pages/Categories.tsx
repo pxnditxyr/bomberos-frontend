@@ -55,6 +55,7 @@ export const Categories = () => {
   }, [] )
 
   const onSelect = ( category : IDataTable, action : string ) => {
+    console.log( 'category on selet', category )
     if ( category )
       onActiveCategory( category as unknown as ICategory )
     if ( action === 'delete' )
@@ -73,7 +74,8 @@ export const Categories = () => {
           ? <Loading />
           : <CrudTable
               data={ categories as unknown as any }
-              header={ header } onSelect={ onSelect }
+              header={ header }
+              onSelect={ onSelect }
               newInitialForm={ newInitialForm }
               activeItem={ activeCategory as unknown as IDataTable }
               formStructure={ formStructure }

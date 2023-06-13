@@ -19,13 +19,19 @@ export const useCategoryStore = () => {
     try {
       if ( category.id ) {
         const { id, ...updateCategory } = category;
-        const { data } = await bomberosApi.patch( `/categories/${ category.id }`, updateCategory );
-        dispatch( onUpdatedCategory({ ...category, user: data.user.email }) );
+        let status = true
+        if ( updateCategory.status === false )
+          status = false
+        const { data } = await bomberosApi.patch( `/categories/${ category.id }`, {
+          ...updateCategory,
+          status
+        });
+        dispatch( onUpdatedCategory({ ...category, user: data.user.email, status }) );
         return;
       }
       const { data } = await bomberosApi.post( '/categories', category )
-      const { id, name, description, user } = data
-      dispatch( onAddNewCategory({ id, name, description, user: user.email }) )
+      const { id, name, description, user, status } = data
+      dispatch( onAddNewCategory({ id, name, description, status, user: user.email }) )
     } catch ( error : any ) {
       Swal.fire( 'Error', String( error.response.data.message ), 'error' );
     }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Modal } from '..';
 import { useForm, useUiStore } from '../../hooks';
-import { capitalizeString } from '../../helpers';
 
 interface IHeader {
   title: string;
@@ -23,6 +22,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
   const { openDateModal, closeDateModal } = useUiStore()
   const { form, onInputChange, setNewFormState } = useForm({ ...newInitialForm })
   const [ isDeleting, setIsDeleting ] = useState( false )
+  const [ isChanging, setIsChanging ] = useState( false )
 
   const onUpdateClick = ( itemId : string ) => {
     const selectedItem = data.find( item => item.id === itemId )
@@ -37,10 +37,56 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
     onSelect( { ...form, id: itemId }, 'update' )
   }
 
-  const onDeleteClick = ( itemId : string ) => {
+  // const onDeleteClick = ( itemId : string ) => {
+  //   setIsDeleting( true )
+  //   const selectedItem = data.find( item => item.id === itemId )
+  //   onSelect( { ...selectedItem }, 'delete' )
+  // }
+
+  const onInactivateClick = ( itemId : string ) => {
+    setIsDeleting( true )
+    setIsChanging( true )
+    const selectedItem = data.find( item => item.id === itemId )
+    if ( !selectedItem ) return
+
+    console.log( 'keys', selectedItem )
+    const validValues = Object.keys( selectedItem ).reduce( ( acc, key ) => {
+      const formStructureNames = formStructure.map( item => item.name )
+      if ( formStructureNames.includes( key ) )
+        acc[ key ] = selectedItem[ key ]
+      return acc
+    }, {} as IDataTable )
+
+    const newItem = {
+      ...validValues,
+      id: itemId,
+      status: false
+    }
+    onSelect( newItem, 'update' )
+
+    startSavingItem( { ...newItem } )
+    setIsChanging( false )
+  }
+
+  const onActivateClick = ( itemId : string ) => {
     setIsDeleting( true )
     const selectedItem = data.find( item => item.id === itemId )
-    onSelect( { ...selectedItem }, 'delete' )
+    if ( !selectedItem ) return
+
+    const validValues = Object.keys( selectedItem ).reduce( ( acc, key ) => {
+      const formStructureNames = formStructure.map( item => item.name )
+      if ( formStructureNames.includes( key ) )
+        acc[ key ] = selectedItem[ key ]
+      return acc
+    }, {} as IDataTable )
+
+    const newItem = {
+      ...validValues,
+      id: itemId,
+      status: true
+    }
+    onSelect( newItem, 'update' )
+    startSavingItem( { ...newItem } )
   }
 
   const onAddClick = () => {
@@ -71,6 +117,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                   <th className="p-4 text-base font-semibold" key={ key }>{ title }</th>
                 ) )
               }
+              <th className="p-4 text-base font-semibold"> Estado </th>
               <th className="p-4 text-base font-semibold"> Acciones </th>
             </tr>
           </thead>
@@ -84,7 +131,8 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                         header.map( ( { key } ) => (
                         ( key!=='id' ) && <td className="px-6 py-4 font-semibold text-white" key={ key }></td>
                       ) )
-                      }
+                     }
+                      <td className="px-6 py-4 font-semibold text-white"></td>
                       <td className="px-6 py-4 font-semibold text-white"></td>
                       <td className="px-6 py-4 font-semibold text-white"></td>
                     </>
@@ -100,6 +148,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                       ( key!=='id' ) && <td className="px-6 py-4 font-semibold text-white" key={ key }>{ item[ key ] }</td>
                     ) )
                   }
+                  <td className={ `px-6 py-4 font-semibold ${ item.status ? 'text-green-500' : 'text-red-500' }` }> { !isChanging && item[ 'status' ] ? <p>Activo</p> : <p>Inactivo</p>  } </td>
                   <td className="px-6 py-4 flex justify-center gap-2">
                     <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -108,11 +157,20 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                       Editar
                     </button>
                     <button
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={ () => onDeleteClick( String( item.id ) || '0' ) }
+                      className={ `bg-green-500 text-white font-bold py-2 px-4 rounded ${ item.status ? 'hover:bg-green-700' : '' } disabled:bg-green-800` }
+                      onClick={ () => onActivateClick( String( item.id ) || '0' ) }
+                      disabled={ Boolean( item.status ) }
                     >
-                      Eliminar
+                      Activar
                     </button>
+                    <button
+                      className={ `bg-red-500 text-white font-bold py-2 px-4 rounded ${ item.status ? 'hover:bg-red-700' : '' } disabled:bg-red-800` }
+                      onClick={ () => onInactivateClick( String( item.id ) || '0' ) }
+                      disabled={ !Boolean( item.status ) }
+                    >
+                      Desactivar
+                    </button>
+
                   </td>
                 </tr>
               ) )
@@ -149,7 +207,7 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                         id={ key }
                         className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                         placeholder={ formStructure[ index ].placeholder }
-                        value={ form[ key ] || '' }
+                        value={ String( form[ key ] ) }
                         onChange={ onInputChange }
                         required
                       />

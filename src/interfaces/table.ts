@@ -1,5 +1,5 @@
 interface IDataTable {
-  [ key : string ]: string | number | null
+  [ key : string ]: string | number | null | boolean
 }
 
 interface IFormStructure {

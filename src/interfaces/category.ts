@@ -6,4 +6,5 @@ export interface ICategory {
   description: string
   user: string
   article?: IArticle[]
+  status?: boolean
 }
