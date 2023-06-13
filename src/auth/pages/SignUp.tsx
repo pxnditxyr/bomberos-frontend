@@ -8,8 +8,8 @@ import Swal from 'sweetalert2'
 const formularioVacio = {
   name: '',
   lastName: '',
-  phone: '0',
-  dni: '0',
+  phone: '',
+  dni: '',
   civilStatus: 'divorciado',
   gender: 'femenino',
   birthDate: '1999-12-12',
