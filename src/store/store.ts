@@ -4,6 +4,7 @@ import { articleSlice } from './articles/articlesSlice';
 import { categorySlice } from './categories';
 import { uiSlice } from './ui';
 import { stationSlice } from './stations/stationSlice';
+import { callSlice } from './calls';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     article: articleSlice.reducer,
     category: categorySlice.reducer,
     station: stationSlice.reducer,
+    call: callSlice.reducer,
     ui: uiSlice.reducer,
   },
   middleware: ( getDefaultMiddleware ) =>

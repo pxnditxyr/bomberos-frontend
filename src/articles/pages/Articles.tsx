@@ -110,6 +110,10 @@ export const Articles = () => {
       startDeletingArticle( article as unknown as IArticle )
   }
 
+  const setActiveCatgeroyNull = () => {
+    onActiveArticle( null )
+  }
+
   return (
     <div className="w-full h-screen flex flex-col items-center gap-4 px-4 py-8" >
       <h1 className="text-5xl font-bold mt-8 text-white" > Artículos </h1>
@@ -123,6 +127,7 @@ export const Articles = () => {
               activeItem={ activeArticle as unknown as IDataTable }
               formStructure={ formStructure }
               startSavingItem={ startSavingArticle as unknown as ( item : IDataTable ) => void }
+              setActiveItemNull={ setActiveCatgeroyNull }
             />
       }
     </div>

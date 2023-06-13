@@ -1,13 +1,20 @@
+import { useEffect } from 'react'
 import { useUiStore } from '../../hooks'
 
 interface IProps {
   title: string
   children: JSX.Element | JSX.Element[]
+  onClose: () => void
 }
 
-export const Modal = ( { children, title } : IProps ) => {
+export const Modal = ( { children, title, onClose } : IProps ) => {
 
   const { isDateModalOpen, closeDateModal } = useUiStore()
+
+  useEffect( () => {
+    if ( !isDateModalOpen )
+      onClose()
+  }, [ isDateModalOpen ] )
 
   return (
     <div id="authentication-modal" tab-index="-1" aria-hidden className={ `fixed top-0 left-0 right-0 z-50 w-full p-4 flex flex flex-col items-center justify-center overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] h-screen ${ isDateModalOpen ? 'block' : 'hidden' } bg-gray-700 bg-opacity-70` }>

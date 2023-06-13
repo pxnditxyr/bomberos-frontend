@@ -81,6 +81,10 @@ export const Stations = () => {
       startDeletingStation( station as unknown as IStation )
   }
 
+  const setActiveCatgeroyNull = () => {
+    onActiveStation( null )
+  }
+
   return (
     <div className="w-full h-screen flex flex-col items-center gap-4 px-4 py-8" >
       <h1 className="text-5xl font-bold mt-8 text-white" > Estaciones </h1>
@@ -94,6 +98,7 @@ export const Stations = () => {
               activeItem={ activeStation as unknown as IDataTable }
               formStructure={ formStructure }
               startSavingItem={ startSavingStation as unknown as ( item : IDataTable ) => void }
+              setActiveItemNull={ setActiveCatgeroyNull }
             />
       }
     </div>

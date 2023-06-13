@@ -10,7 +10,7 @@ export const useArticleStore = () => {
 
   const dispatch = useAppDispatch();
 
-  const onActiveArticle = ( article : IArticle ) => {
+  const onActiveArticle = ( article : IArticle | null ) => {
     dispatch( onSetActiveArticle( article ) );
   };
 

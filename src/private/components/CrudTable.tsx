@@ -16,9 +16,10 @@ interface IProps {
   formStructure: IFormStructure[]
   activeItem: IDataTable | null
   startSavingItem: ( item : IDataTable ) => void
+  setActiveItemNull: () => void
 }
 
-export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructure, activeItem, startSavingItem } : IProps ) => {
+export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructure, activeItem, startSavingItem, setActiveItemNull } : IProps ) => {
   const { openDateModal, closeDateModal } = useUiStore()
   const { form, onInputChange, setNewFormState } = useForm({ ...newInitialForm })
   const [ isDeleting, setIsDeleting ] = useState( false )
@@ -74,6 +75,22 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
             </tr>
           </thead>
           <tbody>
+            <tr className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+              {
+                ( data.length === 0 )
+                  && (
+                    <>
+                      {
+                        header.map( ( { key } ) => (
+                        ( key!=='id' ) && <td className="px-6 py-4 font-semibold text-white" key={ key }></td>
+                      ) )
+                      }
+                      <td className="px-6 py-4 font-semibold text-white"></td>
+                      <td className="px-6 py-4 font-semibold text-white"></td>
+                    </>
+                  )
+              }
+            </tr>
             {
               data.map( ( item, index ) => (
                 <tr className="border-b bg-gray-800 border-gray-700 hover:bg-gray-600" key={ index } >
@@ -114,8 +131,10 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
         </button>
       </div>
       {
-
-        <Modal title="Agregar">
+        <Modal
+          title="Agregar"
+          onClose={ setActiveItemNull }
+        >
             <form
                 className="space-y-6"
                 onSubmit={ onSubmit }
@@ -123,13 +142,13 @@ export const CrudTable = ( { data, header, onSelect, newInitialForm, formStructu
                 {
                   Object.keys( form ).map( ( key, index ) => (
                     <div key={ index }>
-                      <label htmlFor={ key } className="block mb-2 text-sm font-medium text-white">{ capitalizeString( key ) }</label>
+                      <label htmlFor={ key } className="block mb-2 text-sm font-medium text-white">{ formStructure[ index ].label }</label>
                       <input
-                        type="text"
+                        type={ formStructure[ index ].type }
                         name={ key }
                         id={ key }
                         className="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
-                        placeholder={ key }
+                        placeholder={ formStructure[ index ].placeholder }
                         value={ form[ key ] || '' }
                         onChange={ onInputChange }
                         required

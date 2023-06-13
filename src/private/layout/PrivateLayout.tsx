@@ -1,4 +1,5 @@
 import { Navbar } from '../../components';
+import { useUiStore } from '../../hooks';
 import { INavbarLinks } from '../../interfaces';
 
 interface IProps {
@@ -7,30 +8,38 @@ interface IProps {
   hegiht?: boolean;
 }
 
-const navbarLinks : INavbarLinks[] = [
-  {
-    to: 'categories',
-    name: 'Categorías',
-  },
-  {
-    to: 'articles',
-    name: 'Artículos',
-  },
-  {
-    to: 'stations',
-    name: 'Estaciones',
-  },
-  {
-    to: 'calls',
-    name: 'Llamadas',
-  },
-  {
-    to: 'yo-bombero',
-    name: 'Yo Bombero',
-  },
-]
 
 export const PrivateLayout = ( { children, title, hegiht } : IProps ) => {
+
+  const navbarLinks : INavbarLinks[] = [
+    {
+      to: 'categories',
+      name: 'Categorías',
+      onClick: () => closeDateModal(),
+    },
+    {
+      to: 'articles',
+      name: 'Artículos',
+      onClick: () => closeDateModal(),
+    },
+    {
+      to: 'stations',
+      name: 'Estaciones',
+      onClick: () => closeDateModal(),
+    },
+    {
+      to: 'calls',
+      name: 'Llamadas',
+      onClick: () => closeDateModal(),
+    },
+    {
+      to: 'yo-bombero',
+      name: 'Yo Bombero',
+      onClick: () => closeDateModal(),
+    },
+  ]
+  const { closeDateModal } = useUiStore()
+
   return (
     <div className={ `w-full flex flex-col ${ hegiht ? 'h-full' : 'h-screen' } bg-gradient-to-r from-cyan-500 to-blue-500` }>
       <Navbar navbarLinks={ navbarLinks } border />

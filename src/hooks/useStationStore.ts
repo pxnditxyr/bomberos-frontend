@@ -10,7 +10,7 @@ export const useStationStore = () => {
 
   const dispatch = useAppDispatch();
 
-  const onActiveStation = ( station : IStation ) => {
+  const onActiveStation = ( station : IStation | null ) => {
     dispatch( onSetActiveStation( station ) );
   };
 

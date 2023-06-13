@@ -4,6 +4,6 @@ export interface ICall {
   callAddress: string
   description: string
   affectedPhone: number
-  users: string[]
+  users: string[] | string
   station: string
 }

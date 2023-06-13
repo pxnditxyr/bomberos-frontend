@@ -61,9 +61,13 @@ export const Categories = () => {
       startDeletingCategory( category as unknown as ICategory )
   }
 
+  const setActiveCatgeroyNull = () => {
+    onActiveCategory( null )
+  }
+
   return (
-    <div className="w-full h-screen flex flex-col items-center gap-4 px-4 py-8" >
-      <h1 className="text-5xl font-bold mt-8 text-white" > Categorías </h1>
+    <div className="w-full h-screen flex flex-col items-center gap-20 px-4 py-8" >
+      <h1 className="text-5xl font-bold mt-20 text-white" > Categorías </h1>
       {
         ( isLoadingCategories )
           ? <Loading />
@@ -74,6 +78,7 @@ export const Categories = () => {
               activeItem={ activeCategory as unknown as IDataTable }
               formStructure={ formStructure }
               startSavingItem={ startSavingCategory as unknown as ( item : IDataTable ) => void }
+              setActiveItemNull={ setActiveCatgeroyNull }
             />
       }
     </div>

@@ -10,7 +10,7 @@ export const useCategoryStore = () => {
 
   const dispatch = useAppDispatch();
 
-  const onActiveCategory = ( category : ICategory ) => {
+  const onActiveCategory = ( category : ICategory | null ) => {
     dispatch( onSetActiveCategory( category ) );
   };
 

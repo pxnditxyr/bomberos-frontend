@@ -6,6 +6,7 @@ import { PrivateLayout } from '../layout'
 import { Categories } from '../../categories/pages/Categories'
 import { Articles } from '../../articles'
 import { Stations } from '../../stations'
+import { Calls } from '../../calls'
 
 
 export const PrivateRoutes = () => {
@@ -25,7 +26,7 @@ export const PrivateRoutes = () => {
     },
     {
       path: 'calls',
-      Component: YoBombero,
+      Component: Calls,
     },
     {
       path: 'yo-bombero',
