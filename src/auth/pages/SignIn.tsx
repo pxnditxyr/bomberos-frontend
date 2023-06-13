@@ -6,8 +6,8 @@ import { ChangeEvent, useEffect } from 'react'
 import Swal from 'sweetalert2';
 
 const formularioVacio = {
-  email: 'moyaputo@gmail.com',
-  password: '1234567'
+  email: '',
+  password: ''
 }
 
 export const SignIn = () => {

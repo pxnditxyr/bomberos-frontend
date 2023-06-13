@@ -6,16 +6,16 @@ import { useAuthStore, useForm } from '../../hooks'
 import Swal from 'sweetalert2'
 
 const formularioVacio = {
-  name: 'nico',
-  lastName: 'moya',
-  phone: '7458989',
-  dni: '1234567',
+  name: '',
+  lastName: '',
+  phone: '0',
+  dni: '0',
   civilStatus: 'divorciado',
   gender: 'femenino',
   birthDate: '1999-12-12',
-  email: 'moyaputo@gmail.com',
-  password: '1234567',
-  password2: '1234567',
+  email: '',
+  password: '',
+  password2: '',
 }
 
 export const SignUp = () => {

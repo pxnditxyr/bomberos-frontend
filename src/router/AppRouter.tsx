@@ -14,7 +14,6 @@ import { PrivateRoutes } from '../private/routes';
 export const AppRouter = () => {
   
   const { status, checkAuthToken } = useAuthStore();
-  // const status = 'checking'
 
   useEffect( () => {
     checkAuthToken();
@@ -35,6 +34,10 @@ export const AppRouter = () => {
                 <Route path="auth/*" element={ <AuthRoutes /> } />
 
                 <Route path="yo-bombero/*" element={ <Navigate to="/auth/signin" /> } />
+                <Route path="categories/*" element={ <Navigate to="/auth/signin" /> } />
+                <Route path="articles/*" element={ <Navigate to="/auth/signin" /> } />
+                <Route path="stations/*" element={ <Navigate to="/auth/signin" /> } />
+                <Route path="calls/*" element={ <Navigate to="/auth/signin" /> } />
               </>
             )
             : (
