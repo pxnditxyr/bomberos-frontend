@@ -8,9 +8,9 @@ interface IInitialState {
 }
 
 const initialState : IInitialState = {
-  stations: [],
   activeStation: null,
-  isLoadingStations: true
+  stations: [],
+  isLoadingStations: true,
 }
 
 export const stationSlice = createSlice({
@@ -18,12 +18,42 @@ export const stationSlice = createSlice({
   initialState,
   reducers: {
     onAddNewStation: ( state, { payload } ) => {
-      state.stations.push( payload )
-      state.activeStation = null
+      state.stations.push( payload );
+      state.activeStation = null;
+    },
+    onSetActiveStation: ( state, { payload } ) => {
+      state.activeStation = payload;
+    },
+    onUpdatedStation: ( state, { payload } ) => {
+      state.stations = state.stations.map( ( station ) => station.id === payload.id ? payload : station );
+      state.activeStation = null;
+    },
+    onDeleteStation: ( state, { payload } ) => {
+      state.stations = state.stations.filter( ( station ) => station.id !== payload.id );
+      state.activeStation = null;
+    },
+    onLoadingStations: ( state, { payload } ) => {
+      state.isLoadingStations = false;
+      payload.forEach( ( station : IStation ) => {
+        const exists = state.stations.some( ( dbStation ) => dbStation.id === station.id );
+        if ( !exists )
+          state.stations.push( station );
+      });
+    },
+    onSignOutStations: ( state ) => {
+      state.activeStation = null;
+      state.stations = [];
+      state.isLoadingStations = true;
     }
   }
-})
+});
 
 export const {
-  onAddNewStation
-} = stationSlice.actions
+  onAddNewStation,
+  onDeleteStation,
+  onLoadingStations,
+  onSetActiveStation,
+  onSignOutStations,
+  onUpdatedStation,
+} = stationSlice.actions;
+

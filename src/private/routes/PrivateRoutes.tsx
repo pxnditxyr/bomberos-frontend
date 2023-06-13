@@ -5,6 +5,7 @@ import { YoBombero } from '../../yo-bombero/pages'
 import { PrivateLayout } from '../layout'
 import { Categories } from '../../categories/pages/Categories'
 import { Articles } from '../../articles'
+import { Stations } from '../../stations'
 
 
 export const PrivateRoutes = () => {
@@ -20,7 +21,7 @@ export const PrivateRoutes = () => {
     },
     {
       path: 'stations',
-      Component: YoBombero,
+      Component: Stations,
     },
     {
       path: 'calls',

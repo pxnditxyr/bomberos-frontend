@@ -3,12 +3,14 @@ import { authSlice } from './auth'
 import { articleSlice } from './articles/articlesSlice';
 import { categorySlice } from './categories';
 import { uiSlice } from './ui';
+import { stationSlice } from './stations/stationSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     article: articleSlice.reducer,
     category: categorySlice.reducer,
+    station: stationSlice.reducer,
     ui: uiSlice.reducer,
   },
   middleware: ( getDefaultMiddleware ) =>
